@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    /*
+    * 1.1入职的第一天
+    * */
+    function checkName() {
+        console.log("验证姓名");
+    }
+    checkName();
+    function checkEmail() {
+        console.log("验证邮箱");
+    }
+    checkEmail();
+    function checkPassword() {
+        console.log("验证密码");
+    }
+    checkPassword()
+    /*
+    * 总结：创建了很多全局变量
+    * */
+/*****************************************/
+    /*
+    * 1.2函数的另外一种形式
+    * */
+    var checkName=function () {
+        console.log("验证姓名");
+    };
+    checkName();
+    var checkEmail=function () {
+        console.log("验证姓名");
+    };
+    checkEmail();
+    var checkPassword=function () {
+        console.log("验证姓名");
+    };
+    checkPassword();
+    /*
+    * 总结:会变量提升，同1.1中函数没什么两样
+    *
+    * */
+/*****************************************/
+    /*
+    * 1.3用对象收编变量
+    * */
+    var checkObject={
+        checkNameL:function () {
+            console.log("验证姓名");
+        },
+        checkEmail:function () {
+            console.log("验证姓名");
+        },
+        checkPassword:function () {
+            console.log("验证姓名");
+        }
+    }
+    checkObject.checkNameL();
+    checkObject.checkEmail();
+    checkObject.checkPassword();
+    /*
+    * 总结：用对象把封装变量，减少全局变量
+    * */
+/***************************************/
+    /*
+    * 1.4对象的另外一种形式
+    * */
+    var checkObject=function () {};/*函数也是一个对象*/
+    checkObject.checkName=function () {
+
+    };
+    checkObject.checkEmail=function () {
+
+    };
+    checkObject.checkPassword=function () {
+
+    };
+    checkObject();
+    var checkObject={};
+    checkObject.checkName=function () {
+
+    };
+    checkObject.checkEmail=function () {
+
+    };
+    checkObject.checkPassword=function () {
+
+    };
+    checkObject()/*不能用*/
+    /*
+    * 总结：这样创建的对象不能复制，不能当成一个对象类进行复制
+    * */
+/******************************************/
+    /*
+    * 1.5真假对象
+    * */
+    var checkObject=function () {
+        return{
+            checkName:function () {
+
+            },
+            checkEmail:function () {
+
+            },
+            checkPassword:function () {
+
+            }
+        }
+    };
+    var a=checkObject();
+    a.checkName();
+    a.checkEmail();
+    a.checkPassword();
+    /*
+    * 总结：这样每次在调用对象时，每次返回一个新对象，达到复制的功能， 这样的功能相当于把类，进行实例化
+    * */
+/**************************************/
+    /*
+    * 1.6类也可以
+    * */
+    var checkName=function () {
+        this.checkName=function () {
+            
+        };
+        this.checkEmail=function () {
+            
+        };
+        this.checkPassword=function () {
+            
+        }
+    };
+    var a=new checkObject();
+    a.checkName();
+    a.checkEmail();
+    a.checkPassword();
+    var b=checkObject();/*有问题*/
+    b.checkName();
+    b.checkEmail();
+    b.checkPassword();
+    /*
+    *总结:对每一个对象类实例化，创建的对象复制this的属性和方法，从而拥有其自己属性和方法.(弊端:每次复制this,消耗太大)
+    * */
+/**************************************/
+    /*
+    * 1.7 prototype，原型上添加方法，调用时候，追溯到prototype原型上，从而共用方法
+    * */
+    var checkObject=function () {};
+    checkObject.prototype.checkName=function () {
+
+    };
+    checkObject.prototype.checkEmail=function () {
+
+    };
+    checkObject.prototype.checkPassword=function () {
+
+    };
+    var a=new checkObject();
+    a.checkName();
+    a.checkEmail();
+    a.checkPassword();
+    var checkObject=function () {};
+    checkObject.prototype={
+        checkName:function () {
+
+        },
+        checkEmail:function () {
+
+        },
+        checkPassword:function () {
+
+        }
+    }/*（怎样混用），否则，如在后面为对象的原型对象赋值新对象时，那么它将会覆盖之前对prototype对象赋值的方法*/
+    /*
+    * 总结：prototype的两种方式，不能混用
+    * */
+/********************************************/
+    /*
+    * 1.8方法还可以这样用
+    * */
+    var checkObject={
+        checkName:function () {
+         return this;
+        },
+        checkEmail:function () {
+            return this;
+        },
+        checkPassword:function () {
+
+        }
+    }
+    checkObject.checkName().checkEmail().checkPassword();
+    /*
+    * 总结：用对象封装变量，减少全局变量，返回this,减少对象的创建，减少代码
+    * */
+    var checkObject=function () {};
+    checkObject.prototype={
+        checkName:function () {
+            return this;
+        },
+        checkEmail:function () {
+            return this;
+        },
+        checkPassword:function () {
+            return this;
+        }
+    };
+    var a=new checkObject();
+    a.checkName().checkEmail().checkPassword();
+    /*
+    * 总结：类实例化时，里面方法返回this,减少对象的创建
+    * */
+/*****************************************/
+    /*
+    * 1.9函数的祖先
+    * */
+    Function.prototype.checkEmail=function () {
+
+    }/*即是函数也是对象类，两种实现方法*/
+    var f=function () {};
+    f.checkEmail();
+    var f=new function () {};
+    f.checkEmail();
+    /*
+    * 总结：（弊端：会污染原生对象，对他人创建的函数，被你创建的函数污染，造成不必要的开销）
+    * 这么做在我们这里不被允许，因为你污染了原生对象Function，
+    * 所以别人创建的函数也会被你创建的函数污染，造成不必要的开销，但你可以抽象吹一个统一的添加方法的功能方法
+    * */
+    Function.prototype.addMethods=function (name,fn) {
+        this[name]=fn;
+    }
+    var methods=function () {};
+    /*或者*/
+    var methods=new function () {
+
+    };
+    methods.addMethods('checkEmail',function () {
+
+    });
+    methods.addMethods('checkName',function () {
+
+    });
+    methods.checkName();
+    methods.checkEmail();
+</script>
+<body>
+
+</body>
+</html>
