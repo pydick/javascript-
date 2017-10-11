@@ -3,6 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        /*
+        * 2.2.1创建一个类
+        * */
+        /*var Book=function (id,name,price) {
+            this.id=id;
+            this.name=name;
+            this.price=price;
+        };
+        Book.prototype.display=function () {
+            return "展示这本书";
+        };
+        var book=new Book('10','javascript设计模式',50);
+        console.log(book.id+book.name+book.price+book.display());*/
+        /*
+        * 总结：（怎样在类外面添加方法）
+        * */
+/************************************************/
+    /*
+    * 2.2.2属性与方法封装，私有属性，私有方法，特权方法, 对象共有属性和对象共有方法，构造器，类静态公有属性，类静态公有方法
+    * */
+    var Book=function (id,name,price) {
+        //私有属性
+        var num=1;
+        //私有方法
+        function checkId() {};
+        //特权方法
+        this.getName=function () {};
+        this.getPrice=function () {};
+        this.setName=function () {};
+        this.setPrice=function () {};
+        //对象公有属性
+        this.id=id;
+        //对象公有方法
+        this.copy=function () {};
+        //构造器
+        this.setName(name);
+        this.setPrice(price);
+    };
+        //类静态公有属性
+        Book.isChinese=true;
+        //类静态公有方法
+        Book.resetTime=function () {
+             return "new Time";
+        };
+        Book.prototype={
+            isJSbook:false,
+            display:function () {}
+        }
+        var b=new Book(11,'javascript设计模式',50);
+        console.log(b.num);
+        console.log(b.isJSbook);
+        console.log(b.id);
+        console.log(b.isChinese);
+        console.log(Book.isChinese);
+        console.log(Book.resetTime());
+        /*
+        * 总结：
+        * */
+/********************************************/
+    </script>
 </head>
 <body>
 
