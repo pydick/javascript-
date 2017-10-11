@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    /*
+    * 1.1入职的第一天
+    * */
+/*    function checkName() {
+        console.log("验证姓名");
+    }
+    function checkEmail() {
+        console.log("验证邮箱");
+    }
+    function checkPassword() {
+        console.log("验证密码");
+    }
+    checkName();
+    checkEmail();
+    checkPassword()*/
+    /*
+    * 总结：创建了很多全局变量
+    * */
+/*****************************************/
+    /*
+    * 1.2函数的另外一种形式
+    * */
+/*   console.log(checkName);/!*变量提升，提升到全局作用域和函数作用域最开始的地方， 函数声明式和函数字面量式。只有函数声明才存在函数提升！*!/
+    var checkName=function () {
+        console.log("验证姓名");
+    };
+    var checkEmail=function () {
+        console.log("验证邮箱");
+    };
+    var checkPassword=function () {
+        console.log("验证密码");
+    };
+    console.log(checkName);
+    checkName();
+    checkEmail();
+    checkPassword();*/
+    /*
+    * 总结:会变量提升，同1.1中函数没什么两样
+    *
+    * */
+/*****************************************/
+    /*
+    * 1.3用对象收编变量
+    * */
+/*    var checkObject={
+        checkName:function () {
+            console.log("验证姓名");
+        },
+        checkEmail:function () {
+            console.log("验证邮箱");
+        },
+        checkPassword:function () {
+            console.log("验证密码");
+        }
+    };
+    checkObject.checkName();
+    checkObject.checkEmail();
+    checkObject.checkPassword();*/
+/*    var checkObject=function () {/!*函数对象，里面属性属性值不能用字面形式表示，通过this链接*!/
+        this.checkName=function () {
+            console.log("验证姓名");
+        };
+        var checkEmail=function () {
+            console.log("验证邮箱");
+        };
+        var checkPassword=function () {
+            console.log("验证密码");
+        }
+        return this;
+    }
+    checkObject().checkName();*/
+    /*
+    * 总结：用对象把封装变量，减少全局变量
+    * */
+/***************************************/
+    /*
+    * 1.4对象的另外一种形式
+    * */
+/*    var checkObject=function () {};/!*函数也是一个对象*!/
+    checkObject.checkName=function () {
+        console.log("验证姓名");
+    };
+    checkObject.checkEmail=function () {
+        console.log("验证邮箱");
+    };
+    checkObject.checkPassword=function () {
+        console.log("验证密码");
+    };
+    checkObject.checkName();*/
+/*    var checkObject={};
+    checkObject.checkName=function () {
+        console.log("验证姓名");
+    };
+    checkObject.checkEmail=function () {
+        console.log("验证邮箱");
+    };
+    checkObject.checkPassword=function () {
+        console.log("验证密码");
+    };
+    checkObject.checkName()*/
+    /*
+    * 总结：这样创建的对象不能像类一样复制
+    * */
+/******************************************/
+    /*
+    * 1.5真假对象
+    * */
+/*    var checkObject=function () {/!*调用函数，函数返回对象，原函数也是对象，形成真假函数*!/
+        return{
+            checkName:function () {
+                console.log("验证姓名");
+            },
+            checkEmail:function () {
+                console.log("验证邮箱");
+            },
+            checkPassword:function () {
+                console.log("验证密码");
+            }
+        }
+    };
+    var a=checkObject();
+    a.checkName();
+    a.checkEmail();
+    a.checkPassword();*/
+    /*
+    * 总结：这样每次在调用对象时，每次返回一个新对象，达到复制的功能， 这样的功能相当于把类，进行实例化
+    * */
+/**************************************/
+    /*
+    * 1.6类也可以
+    * */
+/*    var checkObject=function () {/!*函数也是类，也是对象*!/
+         /!*return "aaa";*!/
+        this.checkName=function () {
+            console.log("验证姓名");
+        };
+        this.checkEmail=function () {
+            console.log("验证邮箱");
+        };
+        this.checkPassword=function () {
+            console.log("验证密码");
+        }
+    };
+    var a=new checkObject();
+    a.checkName();
+    a.checkEmail();
+    a.checkPassword();
+    /!*console.log(checkObject());/!*undefined 说明b里面没有东西，里面写得东西属于this*!/!*!/
+    /!*checkObject.checkName();/!*属于this,而不是属于checkObject*!/!*!/*/
+    /*
+    *总结:对每一个对象类实例化，创建的对象复制this的属性和方法，从而拥有其自己属性和方法.(弊端:每次复制this,消耗太大)
+    * */
+/**************************************/
+    /*
+    * 1.7 prototype，原型上添加方法，调用时候，追溯到prototype原型上，从而共用方法
+    * */
+/*    var checkObject=function () {};
+    checkObject.prototype.checkName=function () {
+        console.log("验证姓名");
+    };
+    checkObject.prototype.checkEmail=function () {
+        console.log("验证邮箱");
+    };
+    checkObject.prototype.checkPassword=function () {
+        console.log("验证密码");
+    };
+    var a=new checkObject();
+    a.checkName();
+    a.checkEmail();
+    a.checkPassword();*/
+    /*错误写法：
+    var checkObject={};
+    checkObject.prototype.checkName=function () {
+        console.log("验证名字");
+    };
+    /!*var a=new checkObject();/!*实例化只能是类，不能是对象，函数是对象，也是类*!/!*!/
+    checkObject.prototype.checkName();*/
+    /*    错误的写法如下：
+        var checkObject={
+        this.prototype.checkName=function () {/!*this是作用与函数中的*!/
+
+    }
+    };*/
+    /*    错误写法如下：
+    var checkObject=function () {
+        this.prototype.checkName=function () {/!*this没有prototype*!/
+            console.log("验证姓名");
+        };
+    };
+    var a=new checkObject();
+    a.checkName();/!*实例化对象可以复制this的属性和方法，但是this没有prototype指向，只有原对象自己有prototype*!/*/
+    /*    var checkObject=function () {};
+        checkObject.prototype={
+            checkName:function () {
+                console.log("验证姓名");
+            },
+            checkEmail:function () {
+                console.log("验证邮箱");
+            },
+            checkPassword:function () {
+                console.log("验证密码");
+            }
+        };
+        var a=new checkObject();
+        a.checkName();*/
+    /*
+    * 总结：（函数是对象，函数中用this写自己的属性方法，那么这个函数可以看成类，）
+    *（prototype是对象的属性，只要是对象都有prototype,而不仅是函数,但是prototype既当做对象的属性又独立成为一种对象，设置自己属性，只能时函数）
+    * prototype的两种方式，不能混用，否则后面为对象的原型对象赋的新对象会覆盖之前对prototype对象赋的方法
+    * */
+/********************************************/
+    /*
+    * 1.8方法还可以这样用
+    * */
+/*    var checkObject={
+        checkName:function () {
+            console.log("验证姓名");
+            return this;
+        },
+        checkEmail:function () {
+            console.log("验证邮箱");
+            return this;
+        },
+        checkPassword:function () {
+            console.log("验证密码");
+            return this;
+        }
+    }
+    checkObject.checkName().checkEmail().checkPassword();*/
+    /*
+    * 总结：用对象封装变量，减少全局变量，返回this,减少对象的创建，减少重复使用对象a,减少代码
+    * */
+/*    var checkObject=function () {};
+    checkObject.prototype={
+        checkName:function () {
+            console.log("验证姓名");
+            return this;
+        },
+        checkEmail:function () {
+            console.log("验证邮箱");
+            return this;
+        },
+        checkPassword:function () {
+            console.log("验证密码");
+            return this;
+        }
+    };
+    var a=new checkObject();
+    a.checkName().checkEmail().checkPassword();*/
+    /*
+    * 总结：类实例化时，里面方法返回this,减少对象的创建
+    * */
+/*****************************************/
+    /*
+    * 1.9函数的祖先
+    * */
+    /*Function.prototype.checkEmail=function () {
+        console.log('验证邮箱');
+    };
+    即是函数也是对象类，两种实现方法
+    var f=function () {};
+    f.checkEmail();
+    var f=new Function ();
+    f.checkEmail();*/
+    /*
+    * 总结：（弊端：会污染原生对象，对他人创建的函数，被你创建的函数污染覆盖，造成不必要的开销）
+    * 这么做在我们这里不被允许，因为你污染了原生对象Function，
+    * 所以别人创建的函数也会被你创建的函数污染，造成不必要的开销，但你可以抽象吹一个统一的添加方法的功能方法
+    * */
+/*    Function.prototype.addMethods=function (name,fn) {
+        this[name]=fn;
+    };
+    /!*var methods=function () {};*!/
+    var methods=new Function();
+    methods.addMethods('checkEmail',function () {
+        console.log("验证邮箱")
+    });
+    methods.addMethods('checkName',function () {
+        console.log("验证姓名")
+    });
+    methods.checkEmail();
+    methods.checkName();*/
+/*************************************************/
+    /*
+    * 1.10可以链式添加
+    * */
+    /*Function.prototype.addMethods=function (name,fn) {
+        this[name]=fn;
+        return this;
+    };
+    var methods=new Function();
+    methods.addMethods('checkName',function () {
+        console.log("验证姓名");
+        return this;
+    });
+    methods.addMethods('checkEmail',function () {
+        console.log("验证邮箱");
+        return this;
+    });
+    methods.checkName().checkEmail();*/
+    /*
+    * 总结：链式添加， 原生祖先函数，扩展方法，两种使用方式，函数形式和类形式
+    * */
+/*************************************************/
+    /*
+    * 1.11换一种使用方式
+    * */
+    /*Function.prototype.addMethods=function (name,fn) {
+        this.prototype[name]=fn;
+        return this;
+    };
+    var Methods=function () {};
+    Methods.addMethods('checkName',function () {
+        console.log("验证姓名");
+        return this;
+    });
+    Methods.addMethods('checkEmail',function () {
+        console.log("验证邮箱");
+        return this;
+    });
+    var m=new Methods();
+    m.checkName().checkEmail();*/
+    /*
+    * 总结：添加方法时，用函数形式；调用使用时，类形式
+    * */
+
+    /*
+    * 我问你答
+    * */
+    /*
+    * 真假对象实现方法的链式调用
+    * */
+    /*var falseF=function () {
+        return {
+            content1:function () {
+                console.log("真内容1");
+                return this;
+            },
+            content2:function () {
+                console.log("真内容2");
+                return this;
+            }
+        }
+    }
+    falseF().content1().content2();*/
+    /*
+    * 为函数添加多个方法的addMethods方法
+    * */
+    /*var basef=function () {};
+    basef.prototype.addMethods=function (name,fn) {
+        this[name]=fn;
+        return this;
+    };
+    var basefObj=new basef();
+    basefObj.addMethods('show1',function () {
+        console.log("1");
+        return this;
+    });
+    basefObj.addMethods('show2',function () {
+        console.log("2");
+        return this;
+    });
+    basefObj.show1().show2();*/
+    /*
+    * 既可为函数原型添加方法，又为其自身添加方法的addMethods方法
+    * */
+    /*var basef=function () {
+        this.showself=function () {
+            console.log("我是自身函数内容b");
+        };
+    };
+    basef.prototype.showprof=function () {
+        console.log("我是原型函数内容a");
+    };
+    var baseObj=new basef();
+    baseObj.showprof();
+    baseObj.showself();*/
+</script>
+<body>
+
+</body>
+</html>
